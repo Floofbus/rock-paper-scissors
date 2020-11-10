@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head>
+<script>
+	function computerPlay() {
+		let choices = ["rock", "paper", "scissors"]; 
+		return (choices[Math.floor(Math.random() * 3)]);
+	}
+	
+	// If the players have tied
+	// return that it is a tie
+	// otherwise, See what the player's hand is
+	// See if the computer picked the winning hand
+	// If the computer wins, set winLose to Lose
+	// else set winLose to Win
+	// return a constructed string declaring the winner
+
+	function playRound(playerSelection, computerSelection) {
+		let winLose;
+		let p = playerSelection.toLowerCase();
+		let c = computerSelection.toLowerCase();
+
+		if (p != c) {
+			if (p === "rock") {
+				if (c === "paper") {
+					winLose = "Lose";
+				}
+				else {
+					winLose = "Win";
+				}
+			}
+			else if (p === "paper") {
+				if (c === "scissors") {
+					winLose = "Lose";
+				}
+				else {
+					winLose = "Win";
+				}
+			}
+			else { // Scissors
+				if (c === "rock") {
+					winLose = "Lose";
+				}
+				else {
+					winLose = "Win";
+				}
+			}
+		}
+
+		else {
+			return "Nobody Wins! It's a tie!";
+		}
+		
+		return `You ${winLose}! ${(winLose === "Win") ? playerSelection : computerSelection} beats ${(winLose === "Win") ? computerSelection : playerSelection}`;
+	}
+
+	// Set player score to zero
+	// Set computer score to zero
+	// for 5 times:
+	//	Store the player choice
+	//  store the computer choice
+	//  store the result of playing a round with the player and computer choices
+	//  If the result contains the word "Win", add 1 to the player score
+	//  otherwise, if the result contains the word "Lose", add 1 to the computer score
+	//  display the result of the round
+	//  display the current score
+	// If the player has a higher score than the computer, show a victory message
+	// otherwise, if the player has a lower score than the computer, show a loss meessage
+	// otherwise, show a tie message.
+	
+	function game() {
+		let playerScore = 0;
+		let computerScore = 0;
+
+		for (let i = 0; i < 5; i++) {
+			let playerChoice = prompt("Enter Rock, Paper, or Scissors:");
+			let computerChoice = computerPlay();
+			let roundResult = playRound(playerChoice, computerChoice);
+			if (roundResult.includes("Win")) {
+				playerScore++;
+			}
+			else if (roundResult.includes("Lose")) {
+				computerScore++;
+			}
+			console.log(roundResult);
+			console.log(`Current score:\nPlayer:  ${playerScore} Computer: ${computerScore}`);
+		}
+
+		if (playerScore > computerScore) {
+			console.log("You won the game!");
+		}
+		else if (playerScore < computerScore) {
+			console.log("You lost the game!");
+		}
+		else {
+			console.log("It's a tie!");
+		}
+
+	}
+
+</script></head></html>
